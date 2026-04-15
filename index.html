@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>태산토목설계 태양광계산기</title>
+  <meta name="theme-color" content="#111111" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="태양광계산기" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Malgun Gothic","Apple SD Gothic Neo",sans-serif; background: #f3f4f6; color: #111827; }
+    .wrap { min-height: 100vh; padding: 16px; display: flex; justify-content: center; align-items: flex-start; }
+    .phone { width: 100%; max-width: 430px; background: #fff; border: 4px solid #111; border-radius: 28px; overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,.14); }
+    .header { background: #111; color: #fff; padding: 18px 18px 14px 18px; }
+    .header h1 { margin: 0; font-size: 22px; line-height: 1.25; font-weight: 800; }
+    .header .sub { margin-top: 6px; font-size: 12px; color: #d1d5db; }
+    .page { display: none; padding: 18px; } .page.active { display: block; }
+    .card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 22px; padding: 16px; margin-bottom: 16px; }
+    .card h2 { margin: 0 0 14px 0; font-size: 19px; font-weight: 800; }
+    .field { margin-bottom: 14px; } .field:last-child { margin-bottom: 0; }
+    label { display: block; margin-bottom: 7px; font-size: 14px; font-weight: 700; color: #374151; }
+    .input-row { display: flex; align-items: center; gap: 8px; }
+    input { width: 100%; padding: 13px 14px; border-radius: 14px; border: 1px solid #d1d5db; font-size: 17px; background: #fff; outline: none; }
+    input:focus { border-color: #111; box-shadow: 0 0 0 2px rgba(17,17,17,.08); }
+    .unit { min-width: fit-content; font-size: 13px; color: #6b7280; font-weight: 700; }
+    button { width: 100%; border: none; border-radius: 16px; padding: 14px; font-size: 16px; font-weight: 800; cursor: pointer; }
+    .btn-primary { background: #111; color: #fff; } .btn-secondary { background: #fff; color: #111; border: 1px solid #111; }
+    .result-row { display: flex; justify-content: space-between; gap: 14px; padding: 12px 0; border-bottom: 1px solid #eceff3; }
+    .result-row:last-child { border-bottom: none; }
+    .result-label { font-size: 14px; color: #4b5563; font-weight: 700; }
+    .result-value { text-align: right; font-weight: 800; font-size: 15px; color: #111827; word-break: break-all; }
+    .result-row.emphasis .result-label, .result-row.emphasis .result-value { color: #dc2626; font-weight: 800; }
+    .group-title { margin: 6px 0 10px 0; font-size: 16px; font-weight: 800; border-top: 1px solid #e5e7eb; padding-top: 14px; color: #111827; }
+    .notice, .install-tip { margin-top: 10px; font-size: 12px; color: #6b7280; line-height: 1.5; }
+    .install-tip { background: #fff; border: 1px dashed #d1d5db; padding: 10px 12px; border-radius: 12px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="phone">
+      <div class="header">
+        <h1>태산토목설계 태양광계산기</h1>
+        <div class="sub">만든이. ㈜태산토목설계사무소 박영서 010-3594-9967</div>
+      </div>
+
+      <div id="homePage" class="page active">
+        <div class="card">
+          <h2>지붕면적으로 계산하기</h2>
+          <div class="field"><label for="roofArea">지붕면적</label><div class="input-row"><input id="roofArea" type="text" inputmode="decimal" placeholder="예: 100" /><div class="unit">평</div></div></div>
+          <div class="field"><label for="roofEquity">자기자본금</label><div class="input-row"><input id="roofEquity" type="text" inputmode="decimal" placeholder="예: 10" /><div class="unit">%</div></div></div>
+          <button class="btn-primary" onclick="calculateFromRoof()">계산하기</button>
+        </div>
+
+        <div class="card">
+          <h2>발전용량으로 계산하기</h2>
+          <div class="field"><label for="powerKw">발전용량</label><div class="input-row"><input id="powerKw" type="text" inputmode="decimal" placeholder="예: 80" /><div class="unit">kW</div></div></div>
+          <div class="field"><label for="powerEquity">자기자본금</label><div class="input-row"><input id="powerEquity" type="text" inputmode="decimal" placeholder="예: 15" /><div class="unit">%</div></div></div>
+          <button class="btn-primary" onclick="calculateFromPower()">계산하기</button>
+        </div>
+
+        <button class="btn-secondary" onclick="showPage('settingsPage')">설정</button>
+        <div class="install-tip">웹에 올린 뒤 휴대폰 브라우저 메뉴에서 홈 화면에 추가하면 설치형처럼 사용할 수 있습니다.</div>
+      </div>
+
+      <div id="resultPage" class="page">
+        <button class="btn-secondary" onclick="showPage('homePage')">다시계산</button>
+        <div class="card" style="margin-top: 16px;"><div id="resultRows"></div></div>
+      </div>
+
+      <div id="settingsPage" class="page">
+        <button class="btn-secondary" onclick="showPage('homePage')">다시계산</button>
+        <div class="card" style="margin-top: 16px;">
+          <div class="field"><label for="areaToKwFactor">평수와 발전량 환산계수</label><div class="input-row"><input id="areaToKwFactor" type="text" inputmode="decimal" /></div></div>
+          <div class="field"><label for="dailyAvgHours">일일평균발전시간</label><div class="input-row"><input id="dailyAvgHours" type="text" inputmode="decimal" /><div class="unit">시간</div></div></div>
+          <div class="field"><label for="smpRec">SMP+REC</label><div class="input-row"><input id="smpRec" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="kepcoConnectionCostPerKw">한전연계비</label><div class="input-row"><input id="kepcoConnectionCostPerKw" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="annualInterestRate">원리금균등상환 연금리</label><div class="input-row"><input id="annualInterestRate" type="text" inputmode="decimal" /><div class="unit">%</div></div></div>
+
+          <div class="group-title">유지보수비</div>
+          <div class="field"><label for="maintenance_lt50">50kW 미만</label><div class="input-row"><input id="maintenance_lt50" type="text" inputmode="decimal" /><div class="unit">%</div></div></div>
+          <div class="field"><label for="maintenance_50_100">50kW-100kW</label><div class="input-row"><input id="maintenance_50_100" type="text" inputmode="decimal" /><div class="unit">%</div></div></div>
+          <div class="field"><label for="maintenance_100_500">100kW-500kW</label><div class="input-row"><input id="maintenance_100_500" type="text" inputmode="decimal" /><div class="unit">%</div></div></div>
+          <div class="field"><label for="maintenance_gt500">500kW 초과</label><div class="input-row"><input id="maintenance_gt500" type="text" inputmode="decimal" /><div class="unit">%</div></div></div>
+
+          <div class="group-title">시공비</div>
+          <div class="field"><label for="construction_lt50">50kW 미만</label><div class="input-row"><input id="construction_lt50" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="construction_50_100">50kW-100kW</label><div class="input-row"><input id="construction_50_100" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="construction_100_200">100kW-200kW</label><div class="input-row"><input id="construction_100_200" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="construction_200_300">200kW-300kW</label><div class="input-row"><input id="construction_200_300" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="construction_300_500">300kW-500kW</label><div class="input-row"><input id="construction_300_500" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="construction_gt500">500kW 초과</label><div class="input-row"><input id="construction_gt500" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="notice">설정값은 같은 휴대폰 브라우저에서 자동 저장됩니다. 퍼센트 입력은 5 입력 = 5% 방식입니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SETTINGS_KEY = "solar_calculator_settings_pwa_v1";
+    const defaultSettings = { areaToKwFactor:0.6, dailyAvgHours:3.6, smpRec:200, kepcoConnectionCostPerKw:100000, annualInterestRate:5, maintenance_lt50:10, maintenance_50_100:7, maintenance_100_500:5, maintenance_gt500:5, construction_lt50:1100000, construction_50_100:1000000, construction_100_200:950000, construction_200_300:900000, construction_300_500:850000, construction_gt500:800000 };
+    const pages = ["homePage","resultPage","settingsPage"];
+    function showPage(pageId){ pages.forEach(id => document.getElementById(id).classList.toggle("active", id === pageId)); }
+    function loadSettings(){ try { const saved=localStorage.getItem(SETTINGS_KEY); if(!saved) return {...defaultSettings}; return {...defaultSettings,...JSON.parse(saved)}; } catch { return {...defaultSettings}; } }
+    function saveSettings(){ localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); }
+    let settings = loadSettings();
+    function stripCommas(value){ return String(value).replace(/,/g,"").trim(); }
+    function num(value){ const cleaned=stripCommas(value); if(cleaned===""||cleaned===null||cleaned===undefined) return NaN; return Number(cleaned); }
+    function formatNumber(value,digits=0){ if(value===null||value===undefined||Number.isNaN(value)) return ""; return new Intl.NumberFormat("ko-KR",{minimumFractionDigits:digits,maximumFractionDigits:digits}).format(value); }
+    function formatForInput(value,decimals=6){ if(value===""||value===null||value===undefined||Number.isNaN(Number(value))) return ""; const n=Number(value); const fixed=n.toFixed(decimals); const trimmed=fixed.replace(/\.?0+$/,""); const parts=trimmed.split("."); parts[0]=Number(parts[0]).toLocaleString("ko-KR"); return parts.join("."); }
+    function sanitizeNumericInput(value,maxDecimals){ let raw=stripCommas(value).replace(/[^\d.]/g,""); const parts=raw.split("."); if(parts.length>2) raw=parts[0]+"."+parts.slice(1).join(""); const finalParts=raw.split("."); if(finalParts[1]&&finalParts[1].length>maxDecimals) raw=finalParts[0]+"."+finalParts[1].slice(0,maxDecimals); return raw; }
+    function bindMainInput(id){ const el=document.getElementById(id); el.addEventListener("input",()=>{ el.value=sanitizeNumericInput(el.value,2); }); }
+    function bindSettingInput(id,decimals=6){ const el=document.getElementById(id); el.value=formatForInput(settings[id],decimals); el.addEventListener("focus",()=>{ const current=num(el.value); el.value=Number.isNaN(current)?"":String(current); }); el.addEventListener("input",()=>{ const clean=sanitizeNumericInput(el.value,decimals); el.value=clean; settings[id]=clean===""?"":Number(clean); saveSettings(); }); el.addEventListener("blur",()=>{ const current=num(el.value); el.value=Number.isNaN(current)?"":formatForInput(current,decimals); }); }
+    function getMaintenanceRate(kw){ if(kw<50) return Number(settings.maintenance_lt50)/100; if(kw<=100) return Number(settings.maintenance_50_100)/100; if(kw<=500) return Number(settings.maintenance_100_500)/100; return Number(settings.maintenance_gt500)/100; }
+    function getConstructionCostPerKw(kw){ if(kw<50) return Number(settings.construction_lt50); if(kw<=100) return Number(settings.construction_50_100); if(kw<=200) return Number(settings.construction_100_200); if(kw<=300) return Number(settings.construction_200_300); if(kw<=500) return Number(settings.construction_300_500); return Number(settings.construction_gt500); }
+    function getMonthlyPayment(principal,annualRatePercent,months){ if(principal<=0) return 0; const monthlyRate=(annualRatePercent/100)/12; if(monthlyRate===0) return principal/months; return principal*monthlyRate*Math.pow(1+monthlyRate,months)/(Math.pow(1+monthlyRate,months)-1); }
+    function buildResults(mode){
+      const roofArea=num(document.getElementById("roofArea").value), roofEquity=num(document.getElementById("roofEquity").value), inputPowerKw=num(document.getElementById("powerKw").value), powerEquity=num(document.getElementById("powerEquity").value);
+      const equityPct=mode==="roof"?roofEquity:powerEquity, kw=mode==="roof"?roofArea*Number(settings.areaToKwFactor):inputPowerKw;
+      if(Number.isNaN(kw)||Number.isNaN(equityPct)){ alert("입력값을 확인해주세요."); return null; }
+      const monthlyGeneration=kw*Number(settings.dailyAvgHours)*30, totalConstructionCost=kw*getConstructionCostPerKw(kw), kepcoConnectionCost=kw*Number(settings.kepcoConnectionCostPerKw), totalProjectCost=totalConstructionCost+kepcoConnectionCost, equityAmount=totalProjectCost*(equityPct/100), totalLoan=totalProjectCost-equityAmount, monthlyRevenue=monthlyGeneration*Number(settings.smpRec), monthlyMaintenanceCost=monthlyRevenue*getMaintenanceRate(kw), monthlyLoanPayment=getMonthlyPayment(totalLoan,Number(settings.annualInterestRate),120), totalInterest10Years=monthlyLoanPayment*120-totalLoan, monthlyNetYears1to10=monthlyRevenue-monthlyMaintenanceCost-monthlyLoanPayment, monthlyNetYears10to20=monthlyRevenue-monthlyMaintenanceCost, totalProfit20Years=monthlyRevenue*240-(totalProjectCost+totalInterest10Years+monthlyMaintenanceCost*240);
+      return { roofArea:mode==="roof"?roofArea:null, powerKw:kw, monthlyGeneration, totalConstructionCost, kepcoConnectionCost, totalProjectCost, monthlyMaintenanceCost, totalLoan, totalInterest10Years, monthlyRevenue, monthlyNetYears1to10, monthlyNetYears10to20, totalProfit20Years, equityAmount };
+    }
+    function renderResults(results){
+      const rows=[
+        {label:"지붕면적",value:results.roofArea!==null?formatNumber(results.roofArea,2)+" 평":""},
+        {label:"발전용량",value:formatNumber(results.powerKw,2)+" kW",emphasis:true},
+        {label:"월 발전량",value:formatNumber(results.monthlyGeneration,0)+" kWh"},
+        {label:"총 시공비",value:formatNumber(results.totalConstructionCost,0)+" 원"},
+        {label:"한전연계비",value:formatNumber(results.kepcoConnectionCost,0)+" 원"},
+        {label:"총 사업비",value:formatNumber(results.totalProjectCost,0)+" 원",emphasis:true},
+        {label:"월 유지보수비",value:formatNumber(results.monthlyMaintenanceCost,0)+" 원"},
+        {label:"총 대출금",value:formatNumber(results.totalLoan,0)+" 원"},
+        {label:"10년간 총 대출이자",value:formatNumber(results.totalInterest10Years,0)+" 원"},
+        {label:"월 발전수익",value:formatNumber(results.monthlyRevenue,0)+" 원",emphasis:true},
+        {label:"1-10년간 월 순수익",value:formatNumber(results.monthlyNetYears1to10,0)+" 원"},
+        {label:"10-20년간 월 순수익",value:formatNumber(results.monthlyNetYears10to20,0)+" 원"},
+        {label:"20년 총 수익",value:formatNumber(results.totalProfit20Years,0)+" 원",emphasis:true},
+        {label:"자기자본금",value:formatNumber(results.equityAmount,0)+" 원"}
+      ];
+      document.getElementById("resultRows").innerHTML=rows.map(row=>`<div class="result-row ${row.emphasis?"emphasis":""}"><div class="result-label">${row.label}</div><div class="result-value">${row.value}</div></div>`).join("");
+    }
+    function calculateFromRoof(){ const roofArea=stripCommas(document.getElementById("roofArea").value), roofEquity=stripCommas(document.getElementById("roofEquity").value); if(!roofArea||!roofEquity){ alert("지붕면적과 자기자본금을 입력해주세요."); return; } const results=buildResults("roof"); if(!results) return; renderResults(results); showPage("resultPage"); }
+    function calculateFromPower(){ const powerKw=stripCommas(document.getElementById("powerKw").value), powerEquity=stripCommas(document.getElementById("powerEquity").value); if(!powerKw||!powerEquity){ alert("발전용량과 자기자본금을 입력해주세요."); return; } const results=buildResults("power"); if(!results) return; renderResults(results); showPage("resultPage"); }
+    bindMainInput("roofArea"); bindMainInput("roofEquity"); bindMainInput("powerKw"); bindMainInput("powerEquity");
+    ["areaToKwFactor","dailyAvgHours","smpRec","kepcoConnectionCostPerKw","annualInterestRate","maintenance_lt50","maintenance_50_100","maintenance_100_500","maintenance_gt500","construction_lt50","construction_50_100","construction_100_200","construction_200_300","construction_300_500","construction_gt500"].forEach(id=>bindSettingInput(id,6));
+    if('serviceWorker' in navigator){ window.addEventListener('load',()=>{ navigator.serviceWorker.register('./service-worker.js').catch(()=>{}); }); }
+  </script>
+</body>
+</html>
