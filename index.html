@@ -386,7 +386,13 @@
       const monthlyRent=annualRent/12;
       const totalRent20Years=annualRent*20;
 
-      return { siteName, date:todayStr(), kw, equityPct, ratePct:Number(settings.annualInterestRate), totalProjectCost, totalLoan, equityAmount, monthlyRevenue, monthlyNetYears1to10, monthlyNetYears10to20, totalProfit20Years, annualRent, monthlyRent, totalRent20Years, constructionCommission, rentalCommission };
+      return {
+        siteName, date:todayStr(), kw, equityPct, ratePct:Number(settings.annualInterestRate),
+        totalProjectCost, kepcoConnectionCost, totalLoan, equityAmount,
+        monthlyMaintenanceCost, totalInterest10Years,
+        monthlyRevenue, monthlyNetYears1to10, monthlyNetYears10to20, totalProfit20Years,
+        annualRent, monthlyRent, totalRent20Years, constructionCommission, rentalCommission
+      };
     }
 
     function rowHtml(label, value, cls=""){ return `<div class="row ${cls}"><div class="label">${label}</div><div class="value">${value}</div></div>`; }
@@ -398,8 +404,11 @@
 
       document.getElementById("operatorSolarRows").innerHTML=[
         rowHtml("총 사업비", formatWon(data.totalProjectCost)),
+        rowHtml("한전연계비", formatWon(data.kepcoConnectionCost)),
         rowHtml("대출금액", formatWon(data.totalLoan)),
         rowHtml("자기자본금", formatWon(data.equityAmount)),
+        rowHtml("월 유지보수비", formatWon(data.monthlyMaintenanceCost)),
+        rowHtml("10년간 총 대출이자", formatWon(data.totalInterest10Years)),
         rowHtml("월 발전수익", formatWon(data.monthlyRevenue), "red"),
         rowHtml("1~10년간 월 순수익", formatWon(data.monthlyNetYears1to10)),
         rowHtml("10~20년간 월 순수익", formatWon(data.monthlyNetYears10to20)),
