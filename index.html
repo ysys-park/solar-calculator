@@ -13,286 +13,63 @@
   <link rel="apple-touch-icon" href="icon.svg" />
   <style>
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
-      background: #f3f4f6;
-      color: #111827;
-    }
-    .wrap {
-      min-height: 100vh;
-      padding: 16px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
-    .phone {
-      width: 100%;
-      max-width: 430px;
-      background: #ffffff;
-      border: 4px solid #111111;
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.14);
-    }
-    .header {
-      background: #111111;
-      color: #ffffff;
-      padding: 18px 18px 14px 18px;
-    }
-    .header h1 {
-      margin: 0;
-      font-size: 22px;
-      line-height: 1.25;
-      font-weight: 800;
-    }
-    .header .sub {
-      margin-top: 6px;
-      font-size: 12px;
-      color: #d1d5db;
-    }
-    .page { display: none; padding: 18px; }
-    .page.active { display: block; }
+    body { margin:0; font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif; background:#f3f4f6; color:#111827; }
+    .wrap { min-height:100vh; padding:16px; display:flex; justify-content:center; align-items:flex-start; }
+    .phone { width:100%; max-width:430px; background:#fff; border:4px solid #111; border-radius:28px; overflow:hidden; box-shadow:0 16px 40px rgba(0,0,0,.14); }
+    .header { background:#111; color:#fff; padding:18px 18px 14px; }
+    .header h1 { margin:0; font-size:22px; line-height:1.25; font-weight:800; }
+    .header .sub { margin-top:6px; font-size:12px; color:#d1d5db; }
+    .page { display:none; padding:18px; }
+    .page.active { display:block; }
 
-    .card {
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
-      border-radius: 22px;
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-    .card h2 {
-      margin: 0 0 14px 0;
-      font-size: 19px;
-      font-weight: 800;
-    }
-    .field { margin-bottom: 14px; }
-    .field:last-child { margin-bottom: 0; }
-    label {
-      display: block;
-      margin-bottom: 7px;
-      font-size: 14px;
-      font-weight: 700;
-      color: #374151;
-    }
-    .input-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    input {
-      width: 100%;
-      padding: 13px 14px;
-      border-radius: 14px;
-      border: 1px solid #d1d5db;
-      font-size: 17px;
-      background: #ffffff;
-      outline: none;
-    }
-    input:focus {
-      border-color: #111111;
-      box-shadow: 0 0 0 2px rgba(17,17,17,0.08);
-    }
-    .unit {
-      min-width: fit-content;
-      font-size: 13px;
-      color: #6b7280;
-      font-weight: 700;
-    }
-    .btn-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    .btn-row.three {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-    button {
-      width: 100%;
-      border: none;
-      border-radius: 16px;
-      padding: 14px;
-      font-size: 15px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-    .btn-primary {
-      background: #111111;
-      color: #ffffff;
-    }
-    .btn-secondary {
-      background: #ffffff;
-      color: #111111;
-      border: 1px solid #111111;
-    }
-    .btn-soft {
-      background: #f3f4f6;
-      color: #111111;
-      border: 1px solid #d1d5db;
-    }
-    .notice {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #6b7280;
-      line-height: 1.5;
-    }
-    .group-title {
-      margin: 6px 0 10px 0;
-      font-size: 16px;
-      font-weight: 800;
-      border-top: 1px solid #e5e7eb;
-      padding-top: 14px;
-      color: #111827;
-    }
+    .card { background:#f9fafb; border:1px solid #e5e7eb; border-radius:22px; padding:16px; margin-bottom:16px; }
+    .card h2 { margin:0 0 14px 0; font-size:19px; font-weight:800; }
+    .field { margin-bottom:14px; }
+    .field:last-child { margin-bottom:0; }
+    label { display:block; margin-bottom:7px; font-size:14px; font-weight:700; color:#374151; }
+    .input-row { display:flex; align-items:center; gap:8px; }
+    input { width:100%; padding:13px 14px; border-radius:14px; border:1px solid #d1d5db; font-size:17px; background:#fff; outline:none; }
+    input:focus { border-color:#111; box-shadow:0 0 0 2px rgba(17,17,17,.08); }
+    .unit { min-width:fit-content; font-size:13px; color:#6b7280; font-weight:700; }
+    .btn-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
+    .btn-row.three { grid-template-columns:1fr 1fr 1fr; }
+    button { width:100%; border:none; border-radius:16px; padding:14px; font-size:15px; font-weight:800; cursor:pointer; }
+    .btn-primary { background:#111; color:#fff; }
+    .btn-secondary { background:#fff; color:#111; border:1px solid #111; }
+    .btn-soft { background:#f3f4f6; color:#111; border:1px solid #d1d5db; }
+    .notice { margin-top:8px; font-size:12px; color:#6b7280; line-height:1.5; }
+    .group-title { margin:6px 0 10px 0; font-size:16px; font-weight:800; border-top:1px solid #e5e7eb; padding-top:14px; color:#111827; }
 
-    .result-sheet, .quote-sheet {
-      background: #ffffff;
-      border: 1px solid #dbe2ea;
-      border-radius: 24px;
-      overflow: hidden;
-    }
-    .sheet-head, .quote-head {
-      background: #f8fafc;
-      border-bottom: 1px solid #e5e7eb;
-      padding: 16px;
-    }
-    .sheet-title {
-      font-size: 20px;
-      font-weight: 900;
-      margin-bottom: 10px;
-    }
-    .quote-title {
-      font-size: 22px;
-      font-weight: 900;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-    .meta {
-      display: grid;
-      grid-template-columns: 86px 1fr;
-      gap: 6px 10px;
-      font-size: 13px;
-      line-height: 1.45;
-    }
-    .meta .label {
-      color: #6b7280;
-      font-weight: 700;
-    }
-    .meta .value {
-      font-weight: 800;
-      word-break: break-word;
-    }
-    .section {
-      padding: 10px 16px 2px;
-    }
-    .section-title {
-      font-size: 16px;
-      font-weight: 900;
-      margin: 10px 0 8px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid #111827;
-    }
-    .section-sub {
-      font-size: 12px;
-      color: #6b7280;
-      margin: -2px 0 10px;
-      line-height: 1.5;
-    }
-    .summary-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin: 10px 0 14px;
-    }
-    .summary-card {
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
-      border-radius: 18px;
-      padding: 12px;
-    }
-    .summary-card .k {
-      font-size: 12px;
-      color: #6b7280;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .summary-card .v {
-      font-size: 17px;
-      font-weight: 900;
-      line-height: 1.3;
-      word-break: break-all;
-    }
-    .summary-card.red .v { color: #dc2626; }
+    .result-sheet, .quote-sheet { background:#fff; border:1px solid #dbe2ea; border-radius:24px; overflow:hidden; }
+    .sheet-head, .quote-head { background:#f8fafc; border-bottom:1px solid #e5e7eb; padding:16px; }
+    .sheet-title { font-size:20px; font-weight:900; margin-bottom:10px; }
+    .quote-title { font-size:22px; font-weight:900; text-align:center; margin-bottom:12px; }
+    .meta { display:grid; grid-template-columns:86px 1fr; gap:6px 10px; font-size:13px; line-height:1.45; }
+    .meta .label { color:#6b7280; font-weight:700; }
+    .meta .value { font-weight:800; word-break:break-word; }
+    .section { padding:10px 16px 2px; }
+    .section-title { font-size:16px; font-weight:900; margin:10px 0 8px; padding-bottom:8px; border-bottom:2px solid #111827; }
+    .summary-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:10px 0 14px; }
+    .summary-card { background:#f9fafb; border:1px solid #e5e7eb; border-radius:18px; padding:12px; }
+    .summary-card .k { font-size:12px; color:#6b7280; font-weight:700; margin-bottom:6px; }
+    .summary-card .v { font-size:17px; font-weight:900; line-height:1.3; word-break:break-all; }
+    .summary-card.red .v { color:#dc2626; }
+    .row { display:flex; justify-content:space-between; gap:12px; border-bottom:1px solid #eceff3; padding:11px 0; }
+    .row:last-child { border-bottom:none; }
+    .row .label { font-size:14px; color:#374151; font-weight:700; line-height:1.45; }
+    .row .value { text-align:right; font-size:14px; color:#111827; font-weight:900; line-height:1.45; word-break:break-all; }
+    .row.red .label, .row.red .value { color:#dc2626; }
+    .row.blue .label, .row.blue .value { color:#2563eb; }
+    .quote-note { font-size:12px; color:#6b7280; line-height:1.5; padding:0 16px 16px; }
 
-    .row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      border-bottom: 1px solid #eceff3;
-      padding: 11px 0;
-    }
-    .row:last-child { border-bottom: none; }
-    .row .label {
-      font-size: 14px;
-      color: #374151;
-      font-weight: 700;
-      line-height: 1.45;
-    }
-    .row .value {
-      text-align: right;
-      font-size: 14px;
-      color: #111827;
-      font-weight: 900;
-      line-height: 1.45;
-      word-break: break-all;
-    }
-    .row.red .label, .row.red .value { color: #dc2626; }
-    .row.blue .label, .row.blue .value { color: #2563eb; }
+    .list-table { width:100%; border-collapse:collapse; font-size:13px; }
+    .list-table th, .list-table td { padding:10px 6px; border-bottom:1px solid #eceff3; text-align:center; vertical-align:middle; }
+    .list-table th { color:#4b5563; font-weight:800; background:#f9fafb; }
+    .row-link { cursor:pointer; color:#111827; font-weight:700; }
+    .delete-btn { padding:8px 10px; border-radius:10px; border:1px solid #d1d5db; background:#fff; font-size:12px; font-weight:700; cursor:pointer; }
+    .empty-box { text-align:center; color:#6b7280; font-size:14px; padding:26px 10px 10px; }
 
-    .quote-note {
-      font-size: 12px;
-      color: #6b7280;
-      line-height: 1.5;
-      padding: 0 16px 16px;
-    }
-
-    .list-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-    .list-table th, .list-table td {
-      padding: 10px 6px;
-      border-bottom: 1px solid #eceff3;
-      text-align: center;
-      vertical-align: middle;
-    }
-    .list-table th {
-      color: #4b5563;
-      font-weight: 800;
-      background: #f9fafb;
-    }
-    .row-link {
-      cursor: pointer;
-      color: #111827;
-      font-weight: 700;
-    }
-    .delete-btn {
-      padding: 8px 10px;
-      border-radius: 10px;
-      border: 1px solid #d1d5db;
-      background: #fff;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .empty-box {
-      text-align: center;
-      color: #6b7280;
-      font-size: 14px;
-      padding: 26px 10px 10px;
-    }
+    .hidden-capture { position:fixed; left:-99999px; top:0; width:430px; z-index:-1; }
   </style>
 </head>
 <body>
@@ -307,9 +84,7 @@
         <div class="card">
           <div class="field">
             <label for="siteName">현장명</label>
-            <div class="input-row">
-              <input id="siteName" type="text" maxlength="20" placeholder="예: 태산토목설계 사옥" />
-            </div>
+            <div class="input-row"><input id="siteName" type="text" maxlength="20" placeholder="예: 태산토목설계 사옥" /></div>
           </div>
           <div class="btn-row three">
             <button class="btn-secondary" onclick="showListPage()">목록</button>
@@ -322,17 +97,11 @@
           <h2>발전용량 입력</h2>
           <div class="field">
             <label for="powerKw">발전용량</label>
-            <div class="input-row">
-              <input id="powerKw" type="text" inputmode="decimal" placeholder="예: 100" />
-              <div class="unit">kW</div>
-            </div>
+            <div class="input-row"><input id="powerKw" type="text" inputmode="decimal" placeholder="예: 100" /><div class="unit">kW</div></div>
           </div>
           <div class="field">
             <label for="equityPct">자기자본투자율</label>
-            <div class="input-row">
-              <input id="equityPct" type="text" inputmode="decimal" placeholder="예: 10" />
-              <div class="unit">%</div>
-            </div>
+            <div class="input-row"><input id="equityPct" type="text" inputmode="decimal" placeholder="예: 10" /><div class="unit">%</div></div>
           </div>
           <button class="btn-primary" onclick="calculateMain()">계산하기</button>
           <div class="notice">지붕면적 계산은 발전용량 계산기에서 먼저 계산 후 적용하세요.</div>
@@ -346,7 +115,7 @@
         </div>
         <div class="btn-row">
           <button class="btn-soft" onclick="saveCurrentRecord()">목록에 저장하기</button>
-          <button class="btn-soft" onclick="showListPage()">목록</button>
+          <button class="btn-soft" onclick="shareQuoteFromOperator()">카카오톡 공유</button>
         </div>
 
         <div class="result-sheet">
@@ -379,10 +148,10 @@
       <div id="quotePreviewPage" class="page">
         <div class="btn-row">
           <button class="btn-secondary" onclick="showPage('operatorPage')">홈</button>
-          <button class="btn-primary" onclick="showQuoteExport()">견적서 내보내기</button>
+          <button class="btn-primary" onclick="saveQuoteImage()">견적서 내보내기</button>
         </div>
 
-        <div class="quote-sheet">
+        <div id="quotePreviewSheet" class="quote-sheet">
           <div class="quote-head">
             <div class="quote-title">태양광사업 견적서</div>
             <div class="meta">
@@ -395,22 +164,10 @@
           <div class="section">
             <div class="section-title">1. 태양광 발전사업 시 수익</div>
             <div class="summary-grid">
-              <div class="summary-card">
-                <div class="k">총 사업비</div>
-                <div id="qpTotalProject" class="v">-</div>
-              </div>
-              <div class="summary-card red">
-                <div class="k">20년 총 순수익</div>
-                <div id="qpTotalProfit" class="v">-</div>
-              </div>
-              <div class="summary-card">
-                <div class="k">월 발전수익</div>
-                <div id="qpMonthlyRevenue" class="v">-</div>
-              </div>
-              <div class="summary-card">
-                <div class="k">필요자금</div>
-                <div id="qpEquity" class="v">-</div>
-              </div>
+              <div class="summary-card"><div class="k">총 사업비</div><div id="qpTotalProject" class="v">-</div></div>
+              <div class="summary-card red"><div class="k">20년 총 순수익</div><div id="qpTotalProfit" class="v">-</div></div>
+              <div class="summary-card"><div class="k">월 발전수익</div><div id="qpMonthlyRevenue" class="v">-</div></div>
+              <div class="summary-card"><div class="k">필요자금</div><div id="qpEquity" class="v">-</div></div>
             </div>
             <div id="quotePreviewSolarRows"></div>
           </div>
@@ -424,54 +181,9 @@
         </div>
       </div>
 
-      <div id="quoteExportPage" class="page">
-        <div id="quoteCapture" class="quote-sheet">
-          <div class="quote-head">
-            <div class="quote-title">태양광사업 견적서</div>
-            <div class="meta">
-              <div class="label">현장명</div><div id="qeSiteName" class="value">-</div>
-              <div class="label">작성일</div><div id="qeDate" class="value">-</div>
-              <div class="label">발전용량</div><div id="qePowerKw" class="value">-</div>
-            </div>
-          </div>
-
-          <div class="section">
-            <div class="section-title">1. 태양광 발전사업 시 수익</div>
-            <div class="summary-grid">
-              <div class="summary-card">
-                <div class="k">총 사업비</div>
-                <div id="qeTotalProject" class="v">-</div>
-              </div>
-              <div class="summary-card red">
-                <div class="k">20년 총 순수익</div>
-                <div id="qeTotalProfit" class="v">-</div>
-              </div>
-              <div class="summary-card">
-                <div class="k">월 발전수익</div>
-                <div id="qeMonthlyRevenue" class="v">-</div>
-              </div>
-              <div class="summary-card">
-                <div class="k">필요자금</div>
-                <div id="qeEquity" class="v">-</div>
-              </div>
-            </div>
-            <div id="quoteExportSolarRows"></div>
-          </div>
-
-          <div class="section">
-            <div class="section-title">2. 지붕 임대 시 수익</div>
-            <div id="quoteExportRentRows"></div>
-          </div>
-
-          <div class="quote-note">본 견적서는 입력한 조건과 설정값에 따라 자동 산출된 참고자료입니다.</div>
-        </div>
-      </div>
-
       <div id="listPage" class="page">
         <button class="btn-secondary" onclick="goHome()">홈</button>
-        <div class="card" style="margin-top:16px;">
-          <div id="listContainer"></div>
-        </div>
+        <div class="card" style="margin-top:16px;"><div id="listContainer"></div></div>
       </div>
 
       <div id="calcPage" class="page">
@@ -480,43 +192,28 @@
           <h2>발전용량 계산기</h2>
           <div class="field">
             <label for="calcWidth">가로길이 입력</label>
-            <div class="input-row">
-              <input id="calcWidth" type="text" inputmode="decimal" placeholder="예: 20" />
-              <div class="unit">m</div>
-            </div>
+            <div class="input-row"><input id="calcWidth" type="text" inputmode="decimal" placeholder="예: 20" /><div class="unit">m</div></div>
           </div>
           <div class="field">
             <label for="calcHeight">세로길이 입력</label>
-            <div class="input-row">
-              <input id="calcHeight" type="text" inputmode="decimal" placeholder="예: 30" />
-              <div class="unit">m</div>
-            </div>
+            <div class="input-row"><input id="calcHeight" type="text" inputmode="decimal" placeholder="예: 30" /><div class="unit">m</div></div>
           </div>
           <button class="btn-soft" onclick="calcByRect()">가로길이 세로길이 입력하여 계산하기</button>
 
           <div class="field" style="margin-top:14px;">
             <label for="calcSqm">건물면적(제곱미터)으로 계산하기</label>
-            <div class="input-row">
-              <input id="calcSqm" type="text" inputmode="decimal" placeholder="예: 600" />
-              <div class="unit">㎡</div>
-            </div>
+            <div class="input-row"><input id="calcSqm" type="text" inputmode="decimal" placeholder="예: 600" /><div class="unit">㎡</div></div>
           </div>
           <button class="btn-soft" onclick="calcBySqm()">건물면적(제곱미터)으로 계산하기</button>
 
           <div class="field" style="margin-top:14px;">
             <label for="calcPyeong">건물면적(평)으로 계산하기</label>
-            <div class="input-row">
-              <input id="calcPyeong" type="text" inputmode="decimal" placeholder="예: 181.5" />
-              <div class="unit">평</div>
-            </div>
+            <div class="input-row"><input id="calcPyeong" type="text" inputmode="decimal" placeholder="예: 181.5" /><div class="unit">평</div></div>
           </div>
           <button class="btn-soft" onclick="calcByPyeong()">건물면적(평)으로 계산하기</button>
 
           <div class="group-title">발전용량 계산결과</div>
-          <div class="row red">
-            <div class="label">발전용량</div>
-            <div id="calcResultKw" class="value">-</div>
-          </div>
+          <div class="row red"><div class="label">발전용량</div><div id="calcResultKw" class="value">-</div></div>
           <button class="btn-primary" style="margin-top:14px;" onclick="applyCalcResult()">발전용량에 적용하기</button>
         </div>
       </div>
@@ -524,144 +221,66 @@
       <div id="settingsPage" class="page">
         <button class="btn-secondary" onclick="goHome()">홈</button>
         <div class="card" style="margin-top:16px;">
-          <div class="field">
-            <label for="constructionCommissionPerKw">kW당 시공영업수수료</label>
-            <div class="input-row">
-              <input id="constructionCommissionPerKw" type="text" inputmode="decimal" />
-              <div class="unit">원</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="rentalCommissionPerKw">kW당 지붕임대영업수수료</label>
-            <div class="input-row">
-              <input id="rentalCommissionPerKw" type="text" inputmode="decimal" />
-              <div class="unit">원</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="annualRentPerKw">kW당 연임대료</label>
-            <div class="input-row">
-              <input id="annualRentPerKw" type="text" inputmode="decimal" />
-              <div class="unit">원</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="areaToKwFactor">평수와 발전량 환산계수</label>
-            <div class="input-row">
-              <input id="areaToKwFactor" type="text" inputmode="decimal" />
-            </div>
-          </div>
-          <div class="field">
-            <label for="dailyAvgHours">일일평균발전시간</label>
-            <div class="input-row">
-              <input id="dailyAvgHours" type="text" inputmode="decimal" />
-              <div class="unit">시간</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="smpRec">SMP+REC</label>
-            <div class="input-row">
-              <input id="smpRec" type="text" inputmode="decimal" />
-              <div class="unit">원</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="kepcoConnectionCostPerKw">한전연계비</label>
-            <div class="input-row">
-              <input id="kepcoConnectionCostPerKw" type="text" inputmode="decimal" />
-              <div class="unit">원</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="annualInterestRate">원리금균등상환 연금리</label>
-            <div class="input-row">
-              <input id="annualInterestRate" type="text" inputmode="decimal" />
-              <div class="unit">%</div>
-            </div>
-          </div>
+          <div class="field"><label for="constructionCommissionPerKw">kW당 시공영업수수료</label><div class="input-row"><input id="constructionCommissionPerKw" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="rentalCommissionPerKw">kW당 지붕임대영업수수료</label><div class="input-row"><input id="rentalCommissionPerKw" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="annualRentPerKw">kW당 연임대료</label><div class="input-row"><input id="annualRentPerKw" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="areaToKwFactor">평수와 발전량 환산계수</label><div class="input-row"><input id="areaToKwFactor" type="text" inputmode="decimal" /></div></div>
+          <div class="field"><label for="dailyAvgHours">일일평균발전시간</label><div class="input-row"><input id="dailyAvgHours" type="text" inputmode="decimal" /><div class="unit">시간</div></div></div>
+          <div class="field"><label for="smpRec">SMP+REC</label><div class="input-row"><input id="smpRec" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="kepcoConnectionCostPerKw">한전연계비</label><div class="input-row"><input id="kepcoConnectionCostPerKw" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="annualInterestRate">원리금균등상환 연금리</label><div class="input-row"><input id="annualInterestRate" type="text" inputmode="decimal" /><div class="unit">%</div></div></div>
 
           <div class="group-title">유지보수비</div>
-          <div class="field">
-            <label for="maintenance_lt50">50kW 미만</label>
-            <div class="input-row">
-              <input id="maintenance_lt50" type="text" inputmode="decimal" />
-              <div class="unit">%</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="maintenance_50_100">50kW-100kW</label>
-            <div class="input-row">
-              <input id="maintenance_50_100" type="text" inputmode="decimal" />
-              <div class="unit">%</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="maintenance_100_500">100kW-500kW</label>
-            <div class="input-row">
-              <input id="maintenance_100_500" type="text" inputmode="decimal" />
-              <div class="unit">%</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="maintenance_gt500">500kW 초과</label>
-            <div class="input-row">
-              <input id="maintenance_gt500" type="text" inputmode="decimal" />
-              <div class="unit">%</div>
-            </div>
-          </div>
+          <div class="field"><label for="maintenance_lt50">50kW 미만</label><div class="input-row"><input id="maintenance_lt50" type="text" inputmode="decimal" /><div class="unit">%</div></div></div>
+          <div class="field"><label for="maintenance_50_100">50kW-100kW</label><div class="input-row"><input id="maintenance_50_100" type="text" inputmode="decimal" /><div class="unit">%</div></div></div>
+          <div class="field"><label for="maintenance_100_500">100kW-500kW</label><div class="input-row"><input id="maintenance_100_500" type="text" inputmode="decimal" /><div class="unit">%</div></div></div>
+          <div class="field"><label for="maintenance_gt500">500kW 초과</label><div class="input-row"><input id="maintenance_gt500" type="text" inputmode="decimal" /><div class="unit">%</div></div></div>
 
           <div class="group-title">시공비</div>
-          <div class="field">
-            <label for="construction_lt50">50kW 미만</label>
-            <div class="input-row">
-              <input id="construction_lt50" type="text" inputmode="decimal" />
-              <div class="unit">원</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="construction_50_100">50kW-100kW</label>
-            <div class="input-row">
-              <input id="construction_50_100" type="text" inputmode="decimal" />
-              <div class="unit">원</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="construction_100_200">100kW-200kW</label>
-            <div class="input-row">
-              <input id="construction_100_200" type="text" inputmode="decimal" />
-              <div class="unit">원</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="construction_200_300">200kW-300kW</label>
-            <div class="input-row">
-              <input id="construction_200_300" type="text" inputmode="decimal" />
-              <div class="unit">원</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="construction_300_500">300kW-500kW</label>
-            <div class="input-row">
-              <input id="construction_300_500" type="text" inputmode="decimal" />
-              <div class="unit">원</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="construction_gt500">500kW 초과</label>
-            <div class="input-row">
-              <input id="construction_gt500" type="text" inputmode="decimal" />
-              <div class="unit">원</div>
-            </div>
-          </div>
+          <div class="field"><label for="construction_lt50">50kW 미만</label><div class="input-row"><input id="construction_lt50" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="construction_50_100">50kW-100kW</label><div class="input-row"><input id="construction_50_100" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="construction_100_200">100kW-200kW</label><div class="input-row"><input id="construction_100_200" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="construction_200_300">200kW-300kW</label><div class="input-row"><input id="construction_200_300" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="construction_300_500">300kW-500kW</label><div class="input-row"><input id="construction_300_500" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
+          <div class="field"><label for="construction_gt500">500kW 초과</label><div class="input-row"><input id="construction_gt500" type="text" inputmode="decimal" /><div class="unit">원</div></div></div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- hidden export-only quote -->
+  <div class="hidden-capture">
+    <div id="quoteCapture" class="quote-sheet">
+      <div class="quote-head">
+        <div class="quote-title">태양광사업 견적서</div>
+        <div class="meta">
+          <div class="label">현장명</div><div id="qeSiteName" class="value">-</div>
+          <div class="label">작성일</div><div id="qeDate" class="value">-</div>
+          <div class="label">발전용량</div><div id="qePowerKw" class="value">-</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">1. 태양광 발전사업 시 수익</div>
+        <div class="summary-grid">
+          <div class="summary-card"><div class="k">총 사업비</div><div id="qeTotalProject" class="v">-</div></div>
+          <div class="summary-card red"><div class="k">20년 총 순수익</div><div id="qeTotalProfit" class="v">-</div></div>
+          <div class="summary-card"><div class="k">월 발전수익</div><div id="qeMonthlyRevenue" class="v">-</div></div>
+          <div class="summary-card"><div class="k">필요자금</div><div id="qeEquity" class="v">-</div></div>
+        </div>
+        <div id="quoteExportSolarRows"></div>
+      </div>
+      <div class="section">
+        <div class="section-title">2. 지붕 임대 시 수익</div>
+        <div id="quoteExportRentRows"></div>
+      </div>
+      <div class="quote-note">본 견적서는 입력한 조건과 설정값에 따라 자동 산출된 참고자료입니다.</div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
-    const SETTINGS_KEY = "solar_sales_final_settings_v1";
-    const RECORDS_KEY = "solar_sales_final_records_v1";
+    const SETTINGS_KEY = "solar_sales_final_settings_v2";
+    const RECORDS_KEY = "solar_sales_final_records_v2";
     const defaultSettings = {
       constructionCommissionPerKw: 30000,
       rentalCommissionPerKw: 20000,
@@ -682,368 +301,259 @@
       construction_300_500: 850000,
       construction_gt500: 800000
     };
-
-    const pages = ["homePage","operatorPage","quotePreviewPage","quoteExportPage","listPage","calcPage","settingsPage"];
+    const pages = ["homePage","operatorPage","quotePreviewPage","listPage","calcPage","settingsPage"];
     let settings = loadSettings();
     let currentData = null;
     let calcResultValue = null;
 
-    function showPage(pageId) {
-      pages.forEach(id => document.getElementById(id).classList.toggle("active", id === pageId));
-    }
-    function goHome() { showPage("homePage"); }
+    function showPage(pageId){ pages.forEach(id => document.getElementById(id).classList.toggle("active", id === pageId)); }
+    function goHome(){ showPage("homePage"); }
 
-    function loadSettings() {
-      try {
-        const saved = localStorage.getItem(SETTINGS_KEY);
-        return saved ? { ...defaultSettings, ...JSON.parse(saved) } : { ...defaultSettings };
-      } catch { return { ...defaultSettings }; }
-    }
-    function saveSettings() { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); }
+    function loadSettings(){ try { const s=localStorage.getItem(SETTINGS_KEY); return s ? { ...defaultSettings, ...JSON.parse(s) } : { ...defaultSettings }; } catch { return { ...defaultSettings }; } }
+    function saveSettings(){ localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); }
+    function loadRecords(){ try { const s=localStorage.getItem(RECORDS_KEY); return s ? JSON.parse(s) : []; } catch { return []; } }
+    function saveRecords(records){ localStorage.setItem(RECORDS_KEY, JSON.stringify(records)); }
 
-    function loadRecords() {
-      try {
-        const saved = localStorage.getItem(RECORDS_KEY);
-        return saved ? JSON.parse(saved) : [];
-      } catch { return []; }
-    }
-    function saveRecords(records) { localStorage.setItem(RECORDS_KEY, JSON.stringify(records)); }
-
-    function stripCommas(value) { return String(value).replace(/,/g, "").trim(); }
-    function num(value) {
-      const cleaned = stripCommas(value);
-      if (cleaned === "" || cleaned === null || cleaned === undefined) return NaN;
-      return Number(cleaned);
-    }
-    function formatNumber(value, digits = 0) {
-      if (value === null || value === undefined || Number.isNaN(value)) return "";
-      return new Intl.NumberFormat("ko-KR", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(value);
-    }
-    function formatWon(v) { return formatNumber(v, 0); }
-    function formatForInput(value, decimals = 6) {
+    function stripCommas(v){ return String(v).replace(/,/g,"").trim(); }
+    function num(v){ const c=stripCommas(v); if(c===""||c===null||c===undefined) return NaN; return Number(c); }
+    function formatNumber(v,d=0){ if(v===null||v===undefined||Number.isNaN(v)) return ""; return new Intl.NumberFormat("ko-KR",{minimumFractionDigits:d,maximumFractionDigits:d}).format(v); }
+    function formatWon(v){ return formatNumber(v,0); }
+    function formatForInput(value, decimals = 6){
       if (value === "" || value === null || value === undefined || Number.isNaN(Number(value))) return "";
-      const n = Number(value);
-      const fixed = n.toFixed(decimals);
-      const trimmed = fixed.replace(/\.?0+$/, "");
-      const parts = trimmed.split(".");
-      parts[0] = Number(parts[0]).toLocaleString("ko-KR");
-      return parts.join(".");
+      const n = Number(value); const fixed = n.toFixed(decimals); const trimmed = fixed.replace(/\.?0+$/, "");
+      const parts = trimmed.split("."); parts[0] = Number(parts[0]).toLocaleString("ko-KR"); return parts.join(".");
     }
-    function sanitizeNumericInput(value, maxDecimals) {
-      let raw = stripCommas(value).replace(/[^\d.]/g, "");
-      const parts = raw.split(".");
+    function sanitizeNumericInput(value, maxDecimals){
+      let raw = stripCommas(value).replace(/[^\d.]/g, ""); const parts = raw.split(".");
       if (parts.length > 2) raw = parts[0] + "." + parts.slice(1).join("");
       const finalParts = raw.split(".");
       if (finalParts[1] && finalParts[1].length > maxDecimals) raw = finalParts[0] + "." + finalParts[1].slice(0, maxDecimals);
       return raw;
     }
-    function bindMainInput(id) {
-      const el = document.getElementById(id);
-      el.addEventListener("input", () => { el.value = sanitizeNumericInput(el.value, 2); });
-    }
-    function bindSettingInput(id, decimals = 6) {
-      const el = document.getElementById(id);
-      el.value = formatForInput(settings[id], decimals);
-      el.addEventListener("focus", () => {
-        const current = num(el.value);
-        el.value = Number.isNaN(current) ? "" : String(current);
-      });
-      el.addEventListener("input", () => {
-        const clean = sanitizeNumericInput(el.value, decimals);
-        el.value = clean;
-        settings[id] = clean === "" ? "" : Number(clean);
-        saveSettings();
-      });
-      el.addEventListener("blur", () => {
-        const current = num(el.value);
-        el.value = Number.isNaN(current) ? "" : formatForInput(current, decimals);
-      });
+    function bindMainInput(id){ const el=document.getElementById(id); el.addEventListener("input",()=>{ el.value=sanitizeNumericInput(el.value,2); }); }
+    function bindSettingInput(id, decimals = 6){
+      const el=document.getElementById(id); el.value=formatForInput(settings[id], decimals);
+      el.addEventListener("focus",()=>{ const current=num(el.value); el.value=Number.isNaN(current)?"":String(current); });
+      el.addEventListener("input",()=>{ const clean=sanitizeNumericInput(el.value, decimals); el.value=clean; settings[id]=clean===""?"":Number(clean); saveSettings(); });
+      el.addEventListener("blur",()=>{ const current=num(el.value); el.value=Number.isNaN(current)?"":formatForInput(current, decimals); });
     }
 
-    function getConstructionCostPerKw(kw) {
-      if (kw < 50) return Number(settings.construction_lt50);
-      if (kw <= 100) return Number(settings.construction_50_100);
-      if (kw <= 200) return Number(settings.construction_100_200);
-      if (kw <= 300) return Number(settings.construction_200_300);
-      if (kw <= 500) return Number(settings.construction_300_500);
+    function getConstructionCostPerKw(kw){
+      if(kw<50) return Number(settings.construction_lt50);
+      if(kw<=100) return Number(settings.construction_50_100);
+      if(kw<=200) return Number(settings.construction_100_200);
+      if(kw<=300) return Number(settings.construction_200_300);
+      if(kw<=500) return Number(settings.construction_300_500);
       return Number(settings.construction_gt500);
     }
-    function getMaintenanceRate(kw) {
-      if (kw < 50) return Number(settings.maintenance_lt50) / 100;
-      if (kw <= 100) return Number(settings.maintenance_50_100) / 100;
-      if (kw <= 500) return Number(settings.maintenance_100_500) / 100;
-      return Number(settings.maintenance_gt500) / 100;
+    function getMaintenanceRate(kw){
+      if(kw<50) return Number(settings.maintenance_lt50)/100;
+      if(kw<=100) return Number(settings.maintenance_50_100)/100;
+      if(kw<=500) return Number(settings.maintenance_100_500)/100;
+      return Number(settings.maintenance_gt500)/100;
     }
-    function getMonthlyPayment(principal, annualRatePercent, months) {
-      if (principal <= 0) return 0;
-      const monthlyRate = (annualRatePercent / 100) / 12;
-      if (monthlyRate === 0) return principal / months;
-      return principal * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
+    function getMonthlyPayment(principal, annualRatePercent, months){
+      if(principal<=0) return 0;
+      const monthlyRate=(annualRatePercent/100)/12;
+      if(monthlyRate===0) return principal/months;
+      return principal*monthlyRate*Math.pow(1+monthlyRate,months)/(Math.pow(1+monthlyRate,months)-1);
     }
-    function todayStr() {
-      const d = new Date();
-      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-    }
+    function todayStr(){ const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; }
 
-    function buildData() {
-      const siteName = document.getElementById("siteName").value.trim() || "-";
-      const kw = num(document.getElementById("powerKw").value);
-      const equityPct = num(document.getElementById("equityPct").value);
-      if (Number.isNaN(kw) || Number.isNaN(equityPct)) {
-        alert("발전용량과 자기자본투자율을 입력해주세요.");
-        return null;
-      }
+    function buildData(){
+      const siteName=document.getElementById("siteName").value.trim()||"-";
+      const kw=num(document.getElementById("powerKw").value);
+      const equityPct=num(document.getElementById("equityPct").value);
+      if(Number.isNaN(kw)||Number.isNaN(equityPct)){ alert("발전용량과 자기자본투자율을 입력해주세요."); return null; }
 
-      const monthlyGeneration = kw * Number(settings.dailyAvgHours) * 30;
-      const totalConstructionCost = kw * getConstructionCostPerKw(kw);
-      const kepcoConnectionCost = kw * Number(settings.kepcoConnectionCostPerKw);
-      const totalProjectCost = totalConstructionCost + kepcoConnectionCost;
-      const equityAmount = totalProjectCost * (equityPct / 100);
-      const totalLoan = totalProjectCost - equityAmount;
-      const monthlyRevenue = monthlyGeneration * Number(settings.smpRec);
-      const monthlyMaintenanceCost = monthlyRevenue * getMaintenanceRate(kw);
-      const monthlyLoanPayment = getMonthlyPayment(totalLoan, Number(settings.annualInterestRate), 120);
-      const totalInterest10Years = monthlyLoanPayment * 120 - totalLoan;
-      const monthlyNetYears1to10 = monthlyRevenue - monthlyMaintenanceCost - monthlyLoanPayment;
-      const monthlyNetYears10to20 = monthlyRevenue - monthlyMaintenanceCost;
-      const totalProfit20Years = monthlyRevenue * 240 - (totalProjectCost + totalInterest10Years + monthlyMaintenanceCost * 240);
+      const monthlyGeneration=kw*Number(settings.dailyAvgHours)*30;
+      const totalConstructionCost=kw*getConstructionCostPerKw(kw);
+      const kepcoConnectionCost=kw*Number(settings.kepcoConnectionCostPerKw);
+      const totalProjectCost=totalConstructionCost+kepcoConnectionCost;
+      const equityAmount=totalProjectCost*(equityPct/100);
+      const totalLoan=totalProjectCost-equityAmount;
+      const monthlyRevenue=monthlyGeneration*Number(settings.smpRec);
+      const monthlyMaintenanceCost=monthlyRevenue*getMaintenanceRate(kw);
+      const monthlyLoanPayment=getMonthlyPayment(totalLoan, Number(settings.annualInterestRate), 120);
+      const totalInterest10Years=monthlyLoanPayment*120-totalLoan;
+      const monthlyNetYears1to10=monthlyRevenue-monthlyMaintenanceCost-monthlyLoanPayment;
+      const monthlyNetYears10to20=monthlyRevenue-monthlyMaintenanceCost;
+      const totalProfit20Years=monthlyRevenue*240-(totalProjectCost+totalInterest10Years+monthlyMaintenanceCost*240);
 
-      const constructionCommission = kw * Number(settings.constructionCommissionPerKw);
-      const rentalCommission = kw * Number(settings.rentalCommissionPerKw);
-      const annualRent = kw * Number(settings.annualRentPerKw);
-      const monthlyRent = annualRent / 12;
-      const totalRent20Years = annualRent * 20;
+      const constructionCommission=kw*Number(settings.constructionCommissionPerKw);
+      const rentalCommission=kw*Number(settings.rentalCommissionPerKw);
+      const annualRent=kw*Number(settings.annualRentPerKw);
+      const monthlyRent=annualRent/12;
+      const totalRent20Years=annualRent*20;
 
-      return {
-        siteName,
-        date: todayStr(),
-        kw,
-        equityPct,
-        ratePct: Number(settings.annualInterestRate),
-        totalProjectCost,
-        totalLoan,
-        equityAmount,
-        monthlyRevenue,
-        monthlyNetYears1to10,
-        monthlyNetYears10to20,
-        totalProfit20Years,
-        annualRent,
-        monthlyRent,
-        totalRent20Years,
-        constructionCommission,
-        rentalCommission
-      };
+      return { siteName, date:todayStr(), kw, equityPct, ratePct:Number(settings.annualInterestRate), totalProjectCost, totalLoan, equityAmount, monthlyRevenue, monthlyNetYears1to10, monthlyNetYears10to20, totalProfit20Years, annualRent, monthlyRent, totalRent20Years, constructionCommission, rentalCommission };
     }
 
-    function rowHtml(label, value, cls = "") {
-      return `<div class="row ${cls}"><div class="label">${label}</div><div class="value">${value}</div></div>`;
-    }
+    function rowHtml(label, value, cls=""){ return `<div class="row ${cls}"><div class="label">${label}</div><div class="value">${value}</div></div>`; }
 
-    function renderOperatorPage(data) {
-      document.getElementById("opSiteName").textContent = data.siteName;
-      document.getElementById("opDate").textContent = data.date;
-      document.getElementById("opPowerKw").textContent = formatNumber(data.kw, 2) + " kW";
+    function renderOperatorPage(data){
+      document.getElementById("opSiteName").textContent=data.siteName;
+      document.getElementById("opDate").textContent=data.date;
+      document.getElementById("opPowerKw").textContent=formatNumber(data.kw,2)+" kW";
 
-      document.getElementById("operatorSolarRows").innerHTML = [
+      document.getElementById("operatorSolarRows").innerHTML=[
         rowHtml("총 사업비", formatWon(data.totalProjectCost)),
         rowHtml("대출금액", formatWon(data.totalLoan)),
         rowHtml("자기자본금", formatWon(data.equityAmount)),
         rowHtml("월 발전수익", formatWon(data.monthlyRevenue), "red"),
         rowHtml("1~10년간 월 순수익", formatWon(data.monthlyNetYears1to10)),
         rowHtml("10~20년간 월 순수익", formatWon(data.monthlyNetYears10to20)),
-        rowHtml("20년 총 순수익", formatWon(data.totalProfit20Years), "red"),
+        rowHtml("20년 총 순수익", formatWon(data.totalProfit20Years), "red")
       ].join("");
 
-      document.getElementById("operatorRentRows").innerHTML = [
+      document.getElementById("operatorRentRows").innerHTML=[
         rowHtml("월 임대료", formatWon(data.monthlyRent)),
         rowHtml("연 임대료", formatWon(data.annualRent)),
-        rowHtml("20년 총 임대수익", formatWon(data.totalRent20Years), "red"),
+        rowHtml("20년 총 임대수익", formatWon(data.totalRent20Years), "red")
       ].join("");
 
-      document.getElementById("operatorCommissionRows").innerHTML = [
+      document.getElementById("operatorCommissionRows").innerHTML=[
         rowHtml("시공영업수수료", formatWon(data.constructionCommission), "blue"),
-        rowHtml("지붕임대영업수수료", formatWon(data.rentalCommission), "blue"),
+        rowHtml("지붕임대영업수수료", formatWon(data.rentalCommission), "blue")
       ].join("");
 
-      currentData = data;
+      currentData=data;
+      renderAllQuotes(data);
       showPage("operatorPage");
     }
 
-    function fillQuote(prefix, data) {
-      document.getElementById(prefix + "SiteName").textContent = data.siteName;
-      document.getElementById(prefix + "Date").textContent = data.date;
-      document.getElementById(prefix + "PowerKw").textContent = formatNumber(data.kw, 2) + " kW";
-
-      document.getElementById(prefix + "TotalProject").textContent = formatWon(data.totalProjectCost);
-      document.getElementById(prefix + "TotalProfit").textContent = formatWon(data.totalProfit20Years);
-      document.getElementById(prefix + "MonthlyRevenue").textContent = formatWon(data.monthlyRevenue);
-      document.getElementById(prefix + "Equity").textContent = formatWon(data.equityAmount);
-
-      const solarRows = [
-        rowHtml("자기자본투자율", formatNumber(data.equityPct, 0) + "%"),
-        rowHtml("상환방식", `원리금균등 10년 / ${formatNumber(data.ratePct, 0)}%`),
-        rowHtml("대출금액", formatWon(data.totalLoan)),
-        rowHtml("1~10년 순수익", formatWon(data.monthlyNetYears1to10)),
-        rowHtml("10~20년 순수익", formatWon(data.monthlyNetYears10to20)),
-      ].join("");
-
-      const rentRows = [
-        rowHtml("월 임대료", formatWon(data.monthlyRent)),
-        rowHtml("연 임대료", formatWon(data.annualRent)),
-        rowHtml("20년 총 수익", formatWon(data.totalRent20Years), "red"),
-      ].join("");
-
-      if (prefix === "qp") {
-        document.getElementById("quotePreviewSolarRows").innerHTML = solarRows;
-        document.getElementById("quotePreviewRentRows").innerHTML = rentRows;
-      } else {
-        document.getElementById("quoteExportSolarRows").innerHTML = solarRows;
-        document.getElementById("quoteExportRentRows").innerHTML = rentRows;
-      }
+    function renderQuoteRows(data){
+      return {
+        solar: [
+          rowHtml("자기자본투자율", formatNumber(data.equityPct,0)+"%"),
+          rowHtml("상환방식", `원리금균등 10년 / ${formatNumber(data.ratePct,0)}%`),
+          rowHtml("대출금액", formatWon(data.totalLoan)),
+          rowHtml("1~10년 순수익", formatWon(data.monthlyNetYears1to10)),
+          rowHtml("10~20년 순수익", formatWon(data.monthlyNetYears10to20))
+        ].join(""),
+        rent: [
+          rowHtml("월 임대료", formatWon(data.monthlyRent)),
+          rowHtml("연 임대료", formatWon(data.annualRent)),
+          rowHtml("20년 총 수익", formatWon(data.totalRent20Years), "red")
+        ].join("")
+      };
     }
 
-    function calculateMain() {
-      const data = buildData();
-      if (!data) return;
-      renderOperatorPage(data);
+    function fillQuote(prefix, data){
+      document.getElementById(prefix+"SiteName").textContent=data.siteName;
+      document.getElementById(prefix+"Date").textContent=data.date;
+      document.getElementById(prefix+"PowerKw").textContent=formatNumber(data.kw,2)+" kW";
+      document.getElementById(prefix+"TotalProject").textContent=formatWon(data.totalProjectCost);
+      document.getElementById(prefix+"TotalProfit").textContent=formatWon(data.totalProfit20Years);
+      document.getElementById(prefix+"MonthlyRevenue").textContent=formatWon(data.monthlyRevenue);
+      document.getElementById(prefix+"Equity").textContent=formatWon(data.equityAmount);
     }
 
-    function showQuotePreview() {
-      if (!currentData) {
-        alert("먼저 계산 결과를 확인해주세요.");
-        return;
-      }
-      fillQuote("qp", currentData);
-      showPage("quotePreviewPage");
+    function renderAllQuotes(data){
+      fillQuote("qp", data);
+      fillQuote("qe", data);
+      const rows=renderQuoteRows(data);
+      document.getElementById("quotePreviewSolarRows").innerHTML=rows.solar;
+      document.getElementById("quotePreviewRentRows").innerHTML=rows.rent;
+      document.getElementById("quoteExportSolarRows").innerHTML=rows.solar;
+      document.getElementById("quoteExportRentRows").innerHTML=rows.rent;
     }
 
-    async function showQuoteExport() {
-      if (!currentData) return;
-      fillQuote("qe", currentData);
-      showPage("quoteExportPage");
-      setTimeout(async () => {
-        await saveQuoteImage();
-        showPage("quotePreviewPage");
-      }, 150);
-    }
+    function calculateMain(){ const data=buildData(); if(!data) return; renderOperatorPage(data); }
+    function showQuotePreview(){ if(!currentData){ alert("먼저 계산 결과를 확인해주세요."); return; } showPage("quotePreviewPage"); }
 
-    async function canvasBlobFromElement(el) {
-      const canvas = await html2canvas(el, { scale: 2, backgroundColor: "#ffffff" });
+    async function canvasBlobFromElement(el){
+      const canvas = await html2canvas(el, { scale:2, backgroundColor:"#ffffff" });
       return new Promise(resolve => canvas.toBlob(resolve, "image/png"));
     }
 
-    async function saveQuoteImage() {
-      try {
-        const blob = await canvasBlobFromElement(document.getElementById("quoteCapture"));
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `${currentData.siteName || "태양광사업견적서"}.png`;
+    async function saveQuoteImage(){
+      if(!currentData){ alert("먼저 계산 결과를 확인해주세요."); return; }
+      try{
+        const blob=await canvasBlobFromElement(document.getElementById("quoteCapture"));
+        const url=URL.createObjectURL(blob);
+        const a=document.createElement("a");
+        a.href=url;
+        a.download=`${currentData.siteName || "태양광사업견적서"}.png`;
         a.click();
         URL.revokeObjectURL(url);
-      } catch (e) {
+      }catch(e){
         alert("견적서 저장 중 오류가 발생했습니다.");
       }
     }
 
-    function saveCurrentRecord() {
-      if (!currentData) {
-        alert("먼저 계산 결과를 확인해주세요.");
-        return;
+    async function shareQuoteBlob(blob){
+      const file=new File([blob], `${currentData.siteName || "태양광사업견적서"}.png`, { type:"image/png" });
+      if(navigator.canShare && navigator.canShare({ files:[file] }) && navigator.share){
+        await navigator.share({ title:"태양광사업 견적서", text:`${currentData.siteName} 견적서입니다.`, files:[file] });
+      } else if(navigator.share){
+        await navigator.share({ title:"태양광사업 견적서", text:`${currentData.siteName} 견적서입니다.` });
+        alert("이 기기에서는 이미지 파일 공유가 제한될 수 있습니다. 필요하면 견적서 내보내기를 사용해주세요.");
+      } else {
+        alert("이 기기에서는 직접 공유가 제한되어 있습니다.");
       }
-      const records = loadRecords();
-      const idx = records.findIndex(r => r.siteName === currentData.siteName);
-      const record = { ...currentData, savedAt: new Date().toISOString() };
-      if (idx >= 0) records[idx] = record;
-      else records.unshift(record);
+    }
+
+    async function shareQuoteFromOperator(){
+      if(!currentData){ alert("먼저 계산 결과를 확인해주세요."); return; }
+      try{
+        const blob=await canvasBlobFromElement(document.getElementById("quoteCapture"));
+        await shareQuoteBlob(blob);
+      }catch(e){
+        if(String(e).includes("AbortError")) return;
+        alert("공유 중 오류가 발생했습니다.");
+      }
+    }
+
+    function saveCurrentRecord(){
+      if(!currentData){ alert("먼저 계산 결과를 확인해주세요."); return; }
+      const records=loadRecords();
+      const idx=records.findIndex(r => r.siteName===currentData.siteName);
+      const record={ ...currentData, savedAt:new Date().toISOString() };
+      if(idx>=0) records[idx]=record; else records.unshift(record);
       saveRecords(records);
       alert("목록에 저장되었습니다.");
     }
 
-    function renderListPage() {
-      const records = loadRecords();
-      const container = document.getElementById("listContainer");
-      if (!records.length) {
-        container.innerHTML = '<div class="empty-box">저장된 목록이 없습니다.</div>';
-        return;
-      }
-      container.innerHTML = `
+    function renderListPage(){
+      const records=loadRecords();
+      const container=document.getElementById("listContainer");
+      if(!records.length){ container.innerHTML='<div class="empty-box">저장된 목록이 없습니다.</div>'; return; }
+      container.innerHTML=`
         <table class="list-table">
-          <thead>
-            <tr><th>순번</th><th>현장명</th><th>발전용량</th><th>삭제</th></tr>
-          </thead>
+          <thead><tr><th>순번</th><th>현장명</th><th>발전용량</th><th>삭제</th></tr></thead>
           <tbody>
-            ${records.map((r, i) => `
+            ${records.map((r,i)=>`
               <tr>
-                <td>${i + 1}</td>
-                <td class="row-link" onclick="openSavedRecord(${i})">${escapeHtml(r.siteName || "-")}</td>
-                <td class="row-link" onclick="openSavedRecord(${i})">${formatNumber(r.kw, 2)} kW</td>
+                <td>${i+1}</td>
+                <td class="row-link" onclick="openSavedRecord(${i})">${escapeHtml(r.siteName||"-")}</td>
+                <td class="row-link" onclick="openSavedRecord(${i})">${formatNumber(r.kw,2)} kW</td>
                 <td><button class="delete-btn" onclick="deleteRecord(${i})">삭제</button></td>
               </tr>
             `).join("")}
           </tbody>
-        </table>
-      `;
+        </table>`;
     }
-    function showListPage() { renderListPage(); showPage("listPage"); }
-    function openSavedRecord(index) {
-      const record = loadRecords()[index];
-      if (!record) return;
-      currentData = record;
-      renderOperatorPage(record);
+    function showListPage(){ renderListPage(); showPage("listPage"); }
+    function openSavedRecord(index){ const record=loadRecords()[index]; if(!record) return; renderOperatorPage(record); }
+    function deleteRecord(index){
+      const records=loadRecords(); const record=records[index];
+      if(!record) return;
+      if(!confirm(`"${record.siteName || '-'}" 항목을 삭제하시겠습니까?`)) return;
+      records.splice(index,1); saveRecords(records); renderListPage();
     }
-    function deleteRecord(index) {
-      const records = loadRecords();
-      const record = records[index];
-      if (!record) return;
-      if (!confirm(`"${record.siteName || '-'}" 항목을 삭제하시겠습니까?`)) return;
-      records.splice(index, 1);
-      saveRecords(records);
-      renderListPage();
-    }
-    function escapeHtml(text) {
-      return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-    }
+    function escapeHtml(text){ return String(text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;"); }
 
-    function setCalcResult(kw) {
-      calcResultValue = kw;
-      document.getElementById("calcResultKw").textContent = formatNumber(kw, 2) + " kW";
-    }
-    function calcByRect() {
-      const w = num(document.getElementById("calcWidth").value);
-      const h = num(document.getElementById("calcHeight").value);
-      if (Number.isNaN(w) || Number.isNaN(h)) { alert("가로와 세로를 입력해주세요."); return; }
-      setCalcResult(w * h * 0.3025 * Number(settings.areaToKwFactor));
-    }
-    function calcBySqm() {
-      const sqm = num(document.getElementById("calcSqm").value);
-      if (Number.isNaN(sqm)) { alert("제곱미터 값을 입력해주세요."); return; }
-      setCalcResult(sqm * 0.3025 * Number(settings.areaToKwFactor));
-    }
-    function calcByPyeong() {
-      const p = num(document.getElementById("calcPyeong").value);
-      if (Number.isNaN(p)) { alert("평수 값을 입력해주세요."); return; }
-      setCalcResult(p * Number(settings.areaToKwFactor));
-    }
-    function applyCalcResult() {
-      if (calcResultValue === null) { alert("먼저 발전용량을 계산해주세요."); return; }
-      document.getElementById("powerKw").value = String(calcResultValue.toFixed(2));
-      showPage("homePage");
-    }
+    function setCalcResult(kw){ calcResultValue=kw; document.getElementById("calcResultKw").textContent=formatNumber(kw,2)+" kW"; }
+    function calcByRect(){ const w=num(document.getElementById("calcWidth").value), h=num(document.getElementById("calcHeight").value); if(Number.isNaN(w)||Number.isNaN(h)){ alert("가로와 세로를 입력해주세요."); return; } setCalcResult(w*h*0.3025*Number(settings.areaToKwFactor)); }
+    function calcBySqm(){ const sqm=num(document.getElementById("calcSqm").value); if(Number.isNaN(sqm)){ alert("제곱미터 값을 입력해주세요."); return; } setCalcResult(sqm*0.3025*Number(settings.areaToKwFactor)); }
+    function calcByPyeong(){ const p=num(document.getElementById("calcPyeong").value); if(Number.isNaN(p)){ alert("평수 값을 입력해주세요."); return; } setCalcResult(p*Number(settings.areaToKwFactor)); }
+    function applyCalcResult(){ if(calcResultValue===null){ alert("먼저 발전용량을 계산해주세요."); return; } document.getElementById("powerKw").value=String(calcResultValue.toFixed(2)); showPage("homePage"); }
 
     ["powerKw","equityPct","calcWidth","calcHeight","calcSqm","calcPyeong"].forEach(bindMainInput);
-    [
-      "constructionCommissionPerKw","rentalCommissionPerKw","annualRentPerKw",
-      "areaToKwFactor","dailyAvgHours","smpRec","kepcoConnectionCostPerKw","annualInterestRate",
-      "maintenance_lt50","maintenance_50_100","maintenance_100_500","maintenance_gt500",
-      "construction_lt50","construction_50_100","construction_100_200","construction_200_300","construction_300_500","construction_gt500"
-    ].forEach(id => bindSettingInput(id, 6));
+    ["constructionCommissionPerKw","rentalCommissionPerKw","annualRentPerKw","areaToKwFactor","dailyAvgHours","smpRec","kepcoConnectionCostPerKw","annualInterestRate","maintenance_lt50","maintenance_50_100","maintenance_100_500","maintenance_gt500","construction_lt50","construction_50_100","construction_100_200","construction_200_300","construction_300_500","construction_gt500"].forEach(id=>bindSettingInput(id,6));
 
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js').catch(() => {});
-      });
-    }
+    if('serviceWorker' in navigator){ window.addEventListener('load',()=>{ navigator.serviceWorker.register('./service-worker.js').catch(()=>{}); }); }
   </script>
 </body>
 </html>
