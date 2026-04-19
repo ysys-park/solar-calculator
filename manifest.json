@@ -1,6 +1,6 @@
 {
-  "name": "태양광사업 견적서",
-  "short_name": "태양광견적서",
+  "name": "태산토목설계 태양광계산기",
+  "short_name": "태양광계산기",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f3f4f6",
